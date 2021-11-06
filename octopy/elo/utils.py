@@ -8,6 +8,9 @@ __EPS__ = 1e-12
 def predict_proba(params, teamA_rating, teamB_rating, has_tie):
     dr = (teamA_rating - teamB_rating) * params["beta"]
     gamma = nn.relu(params["gamma"]) * has_tie
+    print(gamma)
+    print(has_tie)
+    print(teamA_rating,":",teamB_rating)
     pA = jnp.clip(nn.sigmoid(dr - gamma), __EPS__, 1 - __EPS__)
     pB = jnp.clip(nn.sigmoid(-dr - gamma), __EPS__, 1 - __EPS__)
     pD = nn.relu(1.0 - pA - pB) * has_tie

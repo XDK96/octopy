@@ -15,8 +15,8 @@ def predict_proba(params, teamA_rating, teamB_rating, has_tie):
     pB = jnp.clip(nn.sigmoid(-dr - gamma), __EPS__, 1 - __EPS__)
     pD = nn.relu(1.0 - pA - pB) * has_tie
     s = pA + pB + pD
-    return [jnp.array(x, float) for x in [pA / s, pD / s, pB / s]]
-
+    # return [jnp.array(x, float) for x in [pA / s, pD / s, pB / s]]
+    return [jnp.array(x, float) for x in [gamma, has_tie, teamA-rating, teamB_rating]]
 @jit
 def get_log_loss(scoreA, scoreB, pA, pB, pD=0):
     '''return the log loss given the score and probabilities.'''

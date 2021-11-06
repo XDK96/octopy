@@ -237,6 +237,11 @@ class EloRatingNet:
         A dict containing the probabilities.
 
         '''
+        f = open("demofile2.txt", "a")
+        f.write(str(self.best_params_))
+        f.close()
+        
+        
         teamA_rating = self.ratings_[teamA]
         teamB_rating = self.ratings_[teamB]
         pA, pD, pB = predict_proba(
